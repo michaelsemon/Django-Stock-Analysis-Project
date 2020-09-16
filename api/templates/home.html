@@ -1,0 +1,56 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+
+	<br>
+
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+
+        <form method="post" class="form-inline my-2 my-lg-0" action="">
+          {% csrf_token %}
+
+          <input class="form-control mr-sm-2" type="search" placeholder="ex: TSLA, APPL" aria-label="Search" id ="symbol_input" name="symbol_input">
+
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="symbol_submit" name="symbol_input" >Search</button>
+        </form>
+
+		</div>
+	</div>
+
+</div>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>quoteType</th>
+					<th>quoteSourceName</th>
+					<th>currency</th>
+					<th>shortName</th>
+					<th>exchangeTimezoneName</th>
+				</tr>
+
+
+
+				{% for info in stock_info %}
+				<tr>
+					<td>{{stock_info.quoteType}}</td>
+					<td>{{stock_info.quoteSourceName}}</td>
+					<td>{{stock_info.shortName}}</td>
+					<td>{{stock_info.exchangeTimezoneName}}</td>
+				</tr>
+
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
