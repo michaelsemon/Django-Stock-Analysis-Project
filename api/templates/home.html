@@ -10,12 +10,13 @@
 	<div class="col">
 		<div class="card card-body">
 
-        <form method="post" class="form-inline my-2 my-lg-0" action="">
-          {% csrf_token %}
+        <form method="get" class="form-inline my-2 my-lg-0" method="POST" type='text'>
+					{{form.as_p}}
 
-          <input class="form-control mr-sm-2" type="search" placeholder="ex: TSLA, APPL" aria-label="Search" id ="symbol_input" name="symbol_input">
 
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="symbol_submit" name="symbol_input" >Search</button>
+          <input class="form-control mr-sm-2" type="search" placeholder="ex: TSLA, APPL" aria-label="Search" id ="stock_info" name="stock_info">
+
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="stock_info">Search</button>
         </form>
 
 		</div>

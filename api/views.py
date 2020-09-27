@@ -28,10 +28,16 @@ def home(request):
     symbol = yf.Ticker(default_symbol)
     stock_info = symbol.info
 
+
+
     #User input Ticker Sybmol / Filter
-    if request.method == 'GET':
-        symbol_input = request.POST.get('symbol_input', None)
-        symbol_input = str(symbol_input)
+    if request.method == 'POST':
+        form = SymbolLookUp(request.POST)
+        if form.is_valid():
+            symbol_input = request.POST.get('symbol_input', None)
+            stock_info =  yf.Ticker(symbol_input)
+            stock_info = stock_info.info
+            return(stock_info)
 
     #yfinance -- load stock data
         if (symbol_input == ''):
@@ -39,13 +45,15 @@ def home(request):
             symbol = yf.Ticker(default_symbol)
             stock_info = symbol.info
 
-
+        '''
         else:
             symbol = yf.Ticker(symbol_input)
             stock_info = symbol.info
+        '''
 
 
 
 
-    context = {'stock_info': stock_info, 'symbol': symbol, 'symbol_input': symbol_input}
+
+    context = {'stock_info': stock_info, 'symbol': symbol}
     return render(request, 'home.html', context)
